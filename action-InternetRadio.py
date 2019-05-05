@@ -42,21 +42,22 @@ def action_wrapper(hermes, intentMessage, conf):
     import subprocess
     
     try:
-        command=intentMessage.slots.player.first().value
+        command=intentMessage.slots.selectRadioStation.first().value
         subprocess.call( "mpc "+command, shell=True)
         hermes.publish_end_session(intentMessage.session_id,"")  
     except:
-        print("Error with command")
-        #hermes.publish_end_session(intentMessage.session_id,"Fehler")
-    try:
-        playlist=intentMessage.slots.load_list.first().value
-        subprocess.call( "mpc clear", shell=True)
-        subprocess.call( "mpc "+playlist, shell=True)
-        subprocess.call( "mpc play", shell=True)
-        hermes.publish_end_session(intentMessage.session_id,"")  
-    except:
-        print("Error with playlist")
-        #hermes.publish_end_session(intentMessage.session_id,"Fehler")
+        print("Error with command - cakp59:InternetRadio - selectRadioStation")
+        #hermes.publish_end_session(intentMessage.session_id,"Error - selectRadioStation")
+#    try:
+#        playlist=intentMessage.slots.load_list.first().value
+#        subprocess.call( "mpc clear", shell=True)
+#        subprocess.call( "mpc "+playlist, shell=True)
+#        subprocess.call( "mpc play", shell=True)
+#        hermes.publish_end_session(intentMessage.session_id,"")  
+#    except:
+#        print("Error with command - cakp59:InternetRadio - setRadioStationVolume
+")
+        #hermes.publish_end_session(intentMessage.session_id,"Error - setRadioStationVolume")
 
 
 if __name__ == "__main__":
