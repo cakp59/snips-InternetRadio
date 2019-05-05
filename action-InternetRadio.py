@@ -28,7 +28,8 @@ def subscribe_intent_callback(hermes, intentMessage):
     conf = read_configuration_file(CONFIG_INI)
     action_wrapper(hermes, intentMessage, conf)
 
-def selectRadioStation(hermes, intentMessage, conf):
+
+def action_wrapper(hermes, intentMessage, conf):
     """ Write the body of the function that will be executed once the intent is recognized. 
     In your scope, you have the following objects : 
     - intentMessage : an object that represents the recognized intent
@@ -39,34 +40,27 @@ def selectRadioStation(hermes, intentMessage, conf):
     Refer to the documentation for further details. 
     """ 
     import subprocess
-    print "Entrée dans selectRadioStation !"
+    
     try:
-        command=intentMessage.slots.selectRadioStation.first().value
-        subprocess.call( "mpc play "+command, shell=True)
-        hermes.publish_end_session(intentMessage.session_id,"")  
-    except:
-        print "Error with mpc command - selectRadioStation"
-        hermes.publish_end_session(intentMessage.session_id,"Error - selectRadioStation")
-
-def setRadioStationVolume(hermes, intentMessage):
-    """
-    :param hermes: message manager of snips
-    :param intentMessage: intent message incoming from snips broker
-    :return: void
-    """
-    import subprocess
-    print "Entrée dans setRadioStationVolume !"
-    try:
-        command=intentMessage.slots.setRadioStationVolume.first().value
+        command=intentMessage.slots.player.first().value
         subprocess.call( "mpc "+command, shell=True)
         hermes.publish_end_session(intentMessage.session_id,"")  
     except:
-        print "Error with mpc command - setRadioStationVolume"
-        hermes.publish_end_session(intentMessage.session_id,"Error - setRadioStationVolume")
+        print("Error with command")
+        #hermes.publish_end_session(intentMessage.session_id,"Fehler")
+    try:
+        playlist=intentMessage.slots.load_list.first().value
+        subprocess.call( "mpc clear", shell=True)
+        subprocess.call( "mpc "+playlist, shell=True)
+        subprocess.call( "mpc play", shell=True)
+        hermes.publish_end_session(intentMessage.session_id,"")  
+    except:
+        print("Error with playlist")
+        #hermes.publish_end_session(intentMessage.session_id,"Fehler")
+
 
 if __name__ == "__main__":
-    print "Entrée dans main!"
     mqtt_opts = MqttOptions()
     with Hermes(mqtt_options=mqtt_opts) as h:
         h.subscribe_intent("cakp59:InternetRadio", subscribe_intent_callback) \
-        .start()
+         .start()
