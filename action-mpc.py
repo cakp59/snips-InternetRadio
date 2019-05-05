@@ -47,7 +47,7 @@ def action_wrapper(hermes, intentMessage, conf):
         hermes.publish_end_session(intentMessage.session_id,"")  
     except:
         print("Error with command")
-        #hermes.publish_end_session(intentMessage.session_id,"Fehler")
+        #hermes.publish_end_session(intentMessage.session_id,"Error")
     try:
         playlist=intentMessage.slots.load_list.first().value
         subprocess.call( "mpc clear", shell=True)
@@ -56,11 +56,11 @@ def action_wrapper(hermes, intentMessage, conf):
         hermes.publish_end_session(intentMessage.session_id,"")  
     except:
         print("Error with playlist")
-        #hermes.publish_end_session(intentMessage.session_id,"Fehler")
+        hermes.publish_end_session(intentMessage.session_id,"Error")
 
 
 if __name__ == "__main__":
     mqtt_opts = MqttOptions()
     with Hermes(mqtt_options=mqtt_opts) as h:
-        h.subscribe_intent("fbrahe:mpc-intents", subscribe_intent_callback) \
+        h.subscribe_intent("cakp59:selectRadioStation", subscribe_intent_callback) \
          .start()
