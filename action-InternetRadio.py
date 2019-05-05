@@ -28,7 +28,6 @@ def subscribe_intent_callback(hermes, intentMessage):
     conf = read_configuration_file(CONFIG_INI)
     action_wrapper(hermes, intentMessage, conf)
 
-
 def selectRadioStation(hermes, intentMessage, conf):
     """ Write the body of the function that will be executed once the intent is recognized. 
     In your scope, you have the following objects : 
@@ -40,13 +39,13 @@ def selectRadioStation(hermes, intentMessage, conf):
     Refer to the documentation for further details. 
     """ 
     import subprocess
-    
+    print "Entrée dans selectRadioStation !"
     try:
         command=intentMessage.slots.selectRadioStation.first().value
         subprocess.call( "mpc play "+command, shell=True)
         hermes.publish_end_session(intentMessage.session_id,"")  
     except:
-        print("Error with mpc command")
+        print "Error with mpc command - selectRadioStation"
         hermes.publish_end_session(intentMessage.session_id,"Error - selectRadioStation")
 
 def setRadioStationVolume(hermes, intentMessage):
@@ -56,20 +55,19 @@ def setRadioStationVolume(hermes, intentMessage):
     :return: void
     """
     import subprocess
-    
+    print "Entrée dans setRadioStationVolume !"
     try:
         command=intentMessage.slots.setRadioStationVolume.first().value
         subprocess.call( "mpc "+command, shell=True)
         hermes.publish_end_session(intentMessage.session_id,"")  
     except:
-        print("Error with mpc command")
-        hermes.publish_end_session(intentMessage.session_id,"Error")
-
+        print "Error with mpc command - setRadioStationVolume"
+        hermes.publish_end_session(intentMessage.session_id,"Error - setRadioStationVolume")
 
 if __name__ == "__main__":
+    print "Entrée dans main!"
     mqtt_opts = MqttOptions()
     with Hermes(mqtt_options=mqtt_opts) as h:
         h.subscribe_intent("cakp59:selectRadioStation", subscribe_intent_callback) \
+         .subscribe_intent("cakp59:setRadioStationVolume", subscribe_intent_callback) \
         .start()
-#        h.subscribe_intent("cakp59:setRadioStationVolume", subscribe_intent_callback) \
-#         .start()
