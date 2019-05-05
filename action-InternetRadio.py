@@ -43,7 +43,7 @@ def selectRadioStation(hermes, intentMessage, conf):
     
     try:
         command=intentMessage.slots.selectRadioStation.first().value
-        subprocess.call( "mpc "+command, shell=True)
+        subprocess.call( "mpc play "+command, shell=True)
         hermes.publish_end_session(intentMessage.session_id,"")  
     except:
         print("Error with mpc command")
