@@ -62,5 +62,6 @@ if __name__ == "__main__":
     print("Entrée - cakp59:InternetRadio - main")
     mqtt_opts = MqttOptions()
     with Hermes(mqtt_options=mqtt_opts) as h:
-        h.subscribe_intent("cakp59:InternetRadio", subscribe_intent_callback) \
+        h.subscribe_intent("cakp59:selectRadioStation", subscribe_intent_callback) \
+         .subscribe_intent("cakp59:setRadioStationVolume", subscribe_intent_callback) \
          .start()
