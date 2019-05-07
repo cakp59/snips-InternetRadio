@@ -48,7 +48,7 @@ def action_wrapper(hermes, intentMessage, conf):
         hermes.publish_end_session(intentMessage.session_id,"")
     except:
         print("Error with command - cakp59 - InternetRadioStation - selectInternetRadioStation")
-        hermes.publish_end_session(intentMessage.session_id,"Error - InternetRadioStation - selectInternetRadioStation")
+        hermes.publish_end_session(intentMessage.session_id,"Error - InternetRadioStation - selectInternetRadioStation - command="+command)
 
 if __name__ == "__main__":
     print("Entrée - cakp59 - InternetRadioStation - selectInternetRadioStation - main")
