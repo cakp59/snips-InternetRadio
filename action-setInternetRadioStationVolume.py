@@ -40,10 +40,10 @@ def action_wrapper(hermes, intentMessage, conf):
     """
     print("Entrée - cakp59 - InternetRadioStation - setInternetRadioStationVolume - action_wrapper")
     import subprocess
-#    try:
-#        command=intentMessage.slots.setInternetRadioStationVolume.first().value
-#        subprocess.call( "mpc clear ", shell=True)
-#        hermes.publish_end_session(intentMessage.session_id,"")
+    try:
+        command=intentMessage.slots.setInternetRadioStationVolume.first().value
+        subprocess.call( "mpc "+command, shell=True)
+        hermes.publish_end_session(intentMessage.session_id,"")
     except:
         print("Error with command - cakp59 - InternetRadioStation - setInternetRadioStationVolume")
         hermes.publish_end_session(intentMessage.session_id,"Error - InternetRadioStation - setInternetRadioStationVolume")
