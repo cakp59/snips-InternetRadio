@@ -43,13 +43,13 @@ def action_wrapper(hermes, intentMessage, conf):
     import subprocess
     try:
         command=intentMessage.slots.selectInternetRadioStation.first().value
-                subprocess.call( "mpc play 1", shell=True)
-    print("command - cakp59 - InternetRadioStation - selectInternetRadioStation - action_wrapper - command="+command)
-        subprocess.call( "mpc "+command, shell=True)
+                subprocess.call("mpc play 1", shell=True)
+#    print("command - cakp59 - InternetRadioStation - selectInternetRadioStation - action_wrapper - command="+command)
+#        subprocess.call( "mpc "+command, shell=True)
         hermes.publish_end_session(intentMessage.session_id,"")
     except:
         print("Error with command - cakp59 - InternetRadioStation - selectInternetRadioStation")
-        hermes.publish_end_session(intentMessage.session_id,"Error - InternetRadioStation - selectInternetRadioStation - command="+command)
+        hermes.publish_end_session(intentMessage.session_id,"Error - InternetRadioStation - selectInternetRadioStation")
 
 if __name__ == "__main__":
     print("Entrée - cakp59 - InternetRadioStation - selectInternetRadioStation - main")
