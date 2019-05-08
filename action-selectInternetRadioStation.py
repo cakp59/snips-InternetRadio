@@ -44,10 +44,10 @@ def action_wrapper(hermes, intentMessage, conf):
         command="???"
         command=intentMessage.slots.selectInternetRadioStation.first().value
         subprocess.call( "mpc "+command, shell=True)
-        ErrMess="command Ok - cakp59 - InternetRadioStation - selectInternetRadioStation - action_wrapper - 2 command="+command     
+        ErrMess="cakp59 - command Ok - selectInternetRadioStatio n- command="+command     
         hermes.publish_end_session(intentMessage.session_id,ErrMess)
     except:
-        ErrMess="Error with command - cakp59 - InternetRadioStation - selectInternetRadioStation - except - commande "+command
+        ErrMess="cakp59 - commande en erreur - selectInternetRadioStation - commande="+command
         hermes.publish_end_session(intentMessage.session_id,ErrMess)
 
 if __name__ == "__main__":
