@@ -45,9 +45,10 @@ def action_wrapper(hermes, intentMessage, conf):
         command="mpc "+command
         subprocess.call(command, shell=True)
         subprocess.call("mpc save snips.playlist.radio", shell=True)
-        hermes.publish_end_session(intentMessage.session_id,"")
+#        ErrMess="snips-InternetRadio - command OK - SelectedStation - command="+command
+        hermes.publish_end_session(intentMessage.session_id,ErrMess)
     except:
-        ErrMess="snips-InternetRadio - Error with command - loadInternetRadioStation - command="+command
+        ErrMess="snips-InternetRadio - command KO - SelectedStation - command="+command
         hermes.publish_end_session(intentMessage.session_id,ErrMess)
 
 if __name__ == "__main__":
