@@ -40,13 +40,16 @@ def action_wrapper(hermes, intentMessage, conf):
     import subprocess
     try:
         command="--????--"
-#        subprocess.call("mpc clear", shell=True)
         command=intentMessage.slots.RadioStationToLoad.first().value
-        command="mpc "+command
-        subprocess.call(command, shell=True)
-        subprocess.call("mpc save snips.playlist.radio", shell=True)
-#        ErrMess="snips-InternetRadio - command OK - SelectedStation - command="+command
-        hermes.publish_end_session(intentMessage.session_id,ErrMess)
+        if command == "Charge les radios internet":
+                subprocess.call("mpc clear", shell=True)
+
+                
+                
+                subprocess.call("mpc save snips.playlist.radio", shell=True)
+            else:
+                ErrMess="snips-InternetRadio - command KO - loadInternetRadioStation - command="+command
+                hermes.publish_end_session(intentMessage.session_id,ErrMess)
     except:
         ErrMess="snips-InternetRadio - command KO - SelectedStation - command="+command
         hermes.publish_end_session(intentMessage.session_id,ErrMess)
