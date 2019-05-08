@@ -37,12 +37,11 @@ def action_wrapper(hermes, intentMessage, conf):
 
     Refer to the documentation for further details.
     """
-    
     import subprocess
     try:
         command="???"
 #        subprocess.call( "mpc load snips.playlist.radio.txt ", shell=True)
-        command=intentMessage.slots.selectInternetRadioStation.first().value
+        command=intentMessage.slots.SelectedStation.first().value
         command= "mpc "+command
         subprocess.call( "mpc "+command, shell=True)
         ErrMess="cakp59 - command Ok - ©- command="+command     
