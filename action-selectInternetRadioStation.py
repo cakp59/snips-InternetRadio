@@ -40,15 +40,15 @@ def action_wrapper(hermes, intentMessage, conf):
     
     import subprocess
     try:
-        command=intentMessage.slots.selectInternetRadioStation.first().value
         subprocess.call( "mpc load snips.playlist.radio.txt ", shell=True)
-        subprocess.call("mpc play 1", shell=True)
-    print("command - cakp59 - InternetRadioStation - selectInternetRadioStation - action_wrapper - command="+command)
-#        subprocess.call( "mpc "+command, shell=True)
-        hermes.publish_end_session(intentMessage.session_id,"command - cakp59 - InternetRadioStation - selectInternetRadioStation - action_wrapper - command="+command)
+        command="???"
+        command=intentMessage.slots.selectInternetRadioStation.first().value
+        subprocess.call( "mpc "+command, shell=True)
+        ErrMess="command Ok - cakp59 - InternetRadioStation - selectInternetRadioStation - action_wrapper - 2 command="+command     
+        hermes.publish_end_session(intentMessage.session_id,ErrMess)
     except:
-        print("Error with command - cakp59 - InternetRadioStation - selectInternetRadioStation - commande="+command)
-        hermes.publish_end_session(intentMessage.session_id,"Error - InternetRadioStation - selectInternetRadioStation")
+        ErrMess="Error with command - cakp59 - InternetRadioStation - selectInternetRadioStation - except - commande "+command
+        hermes.publish_end_session(intentMessage.session_id,ErrMess)
 
 if __name__ == "__main__":
     mqtt_opts = MqttOptions()
