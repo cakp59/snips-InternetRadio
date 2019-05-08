@@ -25,7 +25,6 @@ def read_configuration_file(configuration_file):
         return dict()
 
 def subscribe_intent_callback(hermes, intentMessage):
-    print("Entrée - cakp59 - InternetRadioStation - selectInternetRadioStation - subscribe_intent_callback")
     conf = read_configuration_file(CONFIG_INI)
     action_wrapper(hermes, intentMessage, conf)
 
@@ -39,20 +38,19 @@ def action_wrapper(hermes, intentMessage, conf):
 
     Refer to the documentation for further details.
     """
-    print("Entrée - cakp59 - InternetRadioStation - selectInternetRadioStation - action_wrapper")
+    
     import subprocess
     try:
         command=intentMessage.slots.selectInternetRadioStation.first().value
-                subprocess.call("mpc play 1", shell=True)
+        subprocess.call("mpc play 1", shell=True)
 #    print("command - cakp59 - InternetRadioStation - selectInternetRadioStation - action_wrapper - command="+command)
 #        subprocess.call( "mpc "+command, shell=True)
-        hermes.publish_end_session(intentMessage.session_id,"")
+        hermes.publish_end_session(intentMessage.session_id,"command - cakp59 - InternetRadioStation - selectInternetRadioStation - action_wrapper - command="+command)
     except:
         print("Error with command - cakp59 - InternetRadioStation - selectInternetRadioStation")
         hermes.publish_end_session(intentMessage.session_id,"Error - InternetRadioStation - selectInternetRadioStation")
 
 if __name__ == "__main__":
-    print("Entrée - cakp59 - InternetRadioStation - selectInternetRadioStation - main")
     mqtt_opts = MqttOptions()
     with Hermes(mqtt_options=mqtt_opts) as h:
         h.subscribe_intent("cakp59:selectInternetRadioStation", subscribe_intent_callback) \
