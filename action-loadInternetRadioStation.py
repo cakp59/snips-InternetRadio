@@ -39,15 +39,14 @@ def action_wrapper(hermes, intentMessage, conf):
 
     Refer to the documentation for further details.
     """
-    print("Entrée - cakp59 - InternetRadioStation - loadInternetRadioStation - action_wrapper")
     import subprocess
     try:
         command=intentMessage.slots.loadInternetRadioStation.first().value
         subprocess.call( "mpc ", shell=True)
         hermes.publish_end_session(intentMessage.session_id,"")
     except:
-        print("Error with command - cakp59 - InternetRadioStation - loadInternetRadioStation")
-        hermes.publish_end_session(intentMessage.session_id,"Error - InternetRadioStation - loadInternetRadioStation")
+        ErrMess="snips-InternetRadio - Error with command - loadInternetRadioStation - command="+command
+        hermes.publish_end_session(intentMessage.session_id,ErrMess)
 
 if __name__ == "__main__":
     mqtt_opts = MqttOptions()
