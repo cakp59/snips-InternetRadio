@@ -53,6 +53,6 @@ def action_wrapper(hermes, intentMessage, conf):
 if __name__ == "__main__":
     mqtt_opts = MqttOptions()
     with Hermes(mqtt_options=mqtt_opts) as h:
-        h.subscribe_intent("cakp59:selectInternetRadioStation", subscribe_intent_callback) \
+        h.subscribe_intent("cakp59:snips_InternetRadio", subscribe_intent_callback) \
          .start()
         
