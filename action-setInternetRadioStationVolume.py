@@ -38,7 +38,7 @@ def action_wrapper(hermes, intentMessage, conf):
       To access global parameters use conf['global']['parameterName']. For end-user parameters use conf['secret']['parameterName']
     Refer to the documentation for further details.
     """
-    print("Entrée - cakp59 - InternetRadioStation - setInternetRadioStationVolume - action_wrapper")
+    print("Entrée - cakp59 - InternetRadioStation - setInternetRadioStationVolume - action_wrapper ")
     import subprocess
     try:
         command=intentMessage.slots.setInternetRadioStationVolume.first().value
