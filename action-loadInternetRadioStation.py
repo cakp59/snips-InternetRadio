@@ -41,8 +41,11 @@ def action_wrapper(hermes, intentMessage, conf):
     """
     import subprocess
     try:
+        command="--????--"
+        subprocess.call("mpc clear", shell=True)
         command=intentMessage.slots.loadInternetRadioStation.first().value
-        subprocess.call( "mpc ", shell=True)
+        command="mpc "+command
+        subprocess.call(command, shell=True)
         hermes.publish_end_session(intentMessage.session_id,"")
     except:
         ErrMess="snips-InternetRadio - Error with command - loadInternetRadioStation - command="+command
