@@ -40,11 +40,12 @@ def action_wrapper(hermes, intentMessage, conf):
     
     import subprocess
     try:
-        subprocess.call( "mpc load snips.playlist.radio.txt ", shell=True)
         command="???"
+#        subprocess.call( "mpc load snips.playlist.radio.txt ", shell=True)
         command=intentMessage.slots.selectInternetRadioStation.first().value
+        command= "mpc "+command
         subprocess.call( "mpc "+command, shell=True)
-        ErrMess="cakp59 - command Ok - selectInternetRadioStatio n- command="+command     
+        ErrMess="cakp59 - command Ok - selectInternetRadioStation- command="+command     
         hermes.publish_end_session(intentMessage.session_id,ErrMess)
     except:
         ErrMess="cakp59 - commande en erreur - selectInternetRadioStation - commande="+command
