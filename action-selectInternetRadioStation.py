@@ -45,7 +45,7 @@ def action_wrapper(hermes, intentMessage, conf):
         command=intentMessage.slots.selectInternetRadioStation.first().value
         command= "mpc "+command
         subprocess.call( "mpc "+command, shell=True)
-        ErrMess="cakp59 - command Ok - selectInternetRadioStation- command="+command     
+        ErrMess="cakp59 - command Ok - ©- command="+command     
         hermes.publish_end_session(intentMessage.session_id,ErrMess)
     except:
         ErrMess="cakp59 - commande en erreur - selectInternetRadioStation - commande="+command
@@ -54,6 +54,6 @@ def action_wrapper(hermes, intentMessage, conf):
 if __name__ == "__main__":
     mqtt_opts = MqttOptions()
     with Hermes(mqtt_options=mqtt_opts) as h:
-        h.subscribe_intent("cakp59:snips_InternetRadio", subscribe_intent_callback) \
+        h.subscribe_intent("cakp59:selectInternetRadioStation", subscribe_intent_callback) \
          .start()
         
