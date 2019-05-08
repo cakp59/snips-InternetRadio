@@ -40,7 +40,7 @@ def action_wrapper(hermes, intentMessage, conf):
     import subprocess
     try:
         command="--????--"
-        subprocess.call("mpc clear", shell=True)
+#        subprocess.call("mpc clear", shell=True)
         command=intentMessage.slots.RadioStationToLoad.first().value
         command="mpc "+command
         subprocess.call(command, shell=True)
