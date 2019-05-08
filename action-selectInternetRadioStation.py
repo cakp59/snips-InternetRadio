@@ -40,7 +40,7 @@ def action_wrapper(hermes, intentMessage, conf):
     import subprocess
     try:
         command="--????--"
-        subprocess.call("mpc load snips.playlist.radio.txt", shell=True)
+        subprocess.call("mpc load snips.playlist.radio", shell=True)
         command=intentMessage.slots.MyRadioStationVolume.first().value
         command= "mpc "+command
         subprocess.call(command, shell=True)
