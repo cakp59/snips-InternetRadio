@@ -39,15 +39,14 @@ def action_wrapper(hermes, intentMessage, conf):
     """
     import subprocess
     try:
-        command="???"
+        command="--???--"
         subprocess.call( "mpc load snips.playlist.radio.txt ", shell=True)
-        command=intentMessage.slots.SelectedStation.first().value
+        command=intentMessage.slots.MyRadioStationVolume.first().value
         command= "mpc "+command
         subprocess.call( command, shell=True)
-        ErrMess="cakp59 - command Ok - SelectedStation - command="+command
-        hermes.publish_end_session(intentMessage.session_id,ErrMess)
+        hermes.publish_end_session(intentMessage.session_id,"")
     except:
-        ErrMess="cakp59 - commande en erreur - SelectedStation - commande="+command
+        ErrMess="snips-InternetRadio - Error with command - SelectedStation - command="+command
         hermes.publish_end_session(intentMessage.session_id,ErrMess)
 
 if __name__ == "__main__":
