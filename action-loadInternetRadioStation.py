@@ -43,7 +43,7 @@ def action_wrapper(hermes, intentMessage, conf):
     try:
         command="--????--"
         subprocess.call("mpc clear", shell=True)
-        command=intentMessage.slots.loadInternetRadioStation.first().value
+        command=intentMessage.slots.RadioStation.first().value
         command="mpc "+command
         subprocess.call(command, shell=True)
         hermes.publish_end_session(intentMessage.session_id,"")
