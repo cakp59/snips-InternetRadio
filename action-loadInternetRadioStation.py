@@ -15,7 +15,6 @@ class SnipsConfigParser(configparser.SafeConfigParser):
         return {section : {option_name : option for option_name, option in self.items(section)} for section in self.sections()}
 
 def read_configuration_file(configuration_file):
-    print("Entrée - cakp59 - InternetRadioStation - loadInternetRadioStation - read_configuration_file")
     try:
         with io.open(configuration_file, encoding=CONFIGURATION_ENCODING_FORMAT) as f:
             conf_parser = SnipsConfigParser()
@@ -25,7 +24,6 @@ def read_configuration_file(configuration_file):
         return dict()
 
 def subscribe_intent_callback(hermes, intentMessage):
-    print("Entrée - cakp59 - InternetRadioStation - loadInternetRadioStation - subscribe_intent_callback")
     conf = read_configuration_file(CONFIG_INI)
     action_wrapper(hermes, intentMessage, conf)
 
@@ -46,6 +44,7 @@ def action_wrapper(hermes, intentMessage, conf):
         command=intentMessage.slots.RadioStation.first().value
         command="mpc "+command
         subprocess.call(command, shell=True)
+        subprocess.call("mpc save snips.playlist.radio", shell=True)
         hermes.publish_end_session(intentMessage.session_id,"")
     except:
         ErrMess="snips-InternetRadio - Error with command - loadInternetRadioStation - command="+command
