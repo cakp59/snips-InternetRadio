@@ -51,7 +51,7 @@ def action_wrapper(hermes, intentMessage, conf):
                 ErrMess="snips-InternetRadio - command KO - loadInternetRadioStation - command="+command
                 hermes.publish_end_session(intentMessage.session_id,ErrMess)
     except:
-        ErrMess="snips-InternetRadio - command KO - SelectedStation - command="+command
+        ErrMess="snips-InternetRadio - command KO - SelectedStation - command= "+command
         hermes.publish_end_session(intentMessage.session_id,ErrMess)
 
 if __name__ == "__main__":
