@@ -44,6 +44,7 @@ def action_wrapper(hermes, intentMessage, conf):
         command=intentMessage.slots.SelectedStation.first().value
         command= "mpc "+command
         subprocess.call(command, shell=True)
+        ErrMess=""
 #        ErrMess="snips-InternetRadio - command OK - SelectedStation - command= "+command
         hermes.publish_end_session(intentMessage.session_id,ErrMess)
     except:
