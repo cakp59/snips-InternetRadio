@@ -45,10 +45,10 @@ def action_wrapper(hermes, intentMessage, conf):
             else:
                 command= "amixer -c1 set Playback ',0  "+toto[5:7]+"%"
         subprocess.call( command, shell=True)
-        ErrMess="snips-InternetRadio - command OK - MyRadioStationVolume - command="+command
+        ErrMess="snips-InternetRadio - command OK - MyRadioStationVolume - command= "+command
         hermes.publish_end_session(intentMessage.session_id,ErrMess)
     except:
-        ErrMess="snips-InternetRadio - command KO - MyRadioStationVolume - command="+command
+        ErrMess="snips-InternetRadio - command KO - MyRadioStationVolume - command= "+command
         hermes.publish_end_session(intentMessage.session_id,ErrMess)
 
 if __name__ == "__main__":
