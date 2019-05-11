@@ -42,14 +42,15 @@ def action_wrapper(hermes, intentMessage, conf):
         command="--????--"
         command=intentMessage.slots.RadioStationToLoad.first().value
         if command == "Charge les radios internet":
-                subprocess.call("mpc clear", shell=True)
+            subprocess.call("mpc rm snips.playlist.radio", shell=True)
+            subprocess.call("mpc clear", shell=True)
 
                 
                 
-                subprocess.call("mpc save snips.playlist.radio", shell=True)
-            else:
-                ErrMess="snips-InternetRadio - command KO - loadInternetRadioStation - command="+command
-                hermes.publish_end_session(intentMessage.session_id,ErrMess)
+            subprocess.call("mpc save snips.playlist.radio", shell=True)
+        else:
+            ErrMess="snips-InternetRadio - command KO - loadInternetRadioStation - command="+command
+            hermes.publish_end_session(intentMessage.session_id,ErrMess)
     except:
         ErrMess="snips-InternetRadio - command KO - SelectedStation - command= "+command
         hermes.publish_end_session(intentMessage.session_id,ErrMess)
