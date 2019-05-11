@@ -39,14 +39,14 @@ def action_wrapper(hermes, intentMessage, conf):
     """
     import subprocess
     try:
-        subprocess.call("mpc clear", shell=True)
-        subprocess.call("mpc load snips.playlist.radio", shell=True)
-#        subprocess.call("amixer -c1 set Playback,0 85%", shell=True)
-        subprocess.call("mpc volume 80", shell=True)
+        subprocess.run("mpc clear", shell=True)
+        subprocess.run("mpc load snips.playlist.radio", shell=True)
+#        subprocess.run("amixer -c1 set Playback,0 85%", shell=True)
+        subprocess.run("mpc volume 80", shell=True)
         command="--????--"
         command=intentMessage.slots.SelectedStation.first().value
         command= "mpc "+command
-        subprocess.call(command, shell=True)
+        subprocess.run(command, shell=True)
         ErrMess=""
 #        ErrMess="snips-InternetRadio - command OK - SelectedStation - command="+command
         hermes.publish_end_session(intentMessage.session_id,ErrMess)
