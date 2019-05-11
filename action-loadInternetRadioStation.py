@@ -41,10 +41,12 @@ def action_wrapper(hermes, intentMessage, conf):
     try:
         command="--????--"
         command=intentMessage.slots.RadioStationToLoad.first().value
-        if command == "Charge les radios internet":
-            subprocess.call("mpc rm snips.playlist.radio", shell=True)
+        if command == "recharge les radios internet":
             subprocess.call("mpc clear", shell=True)
-
+            subprocess.call("mpc rm snips.playlist.radio", shell=True)
+            radioURL=""
+                command="mpc add "+radioURL
+                subprocess.call(command, shell=True)
                 
                 
             subprocess.call("mpc save snips.playlist.radio", shell=True)
