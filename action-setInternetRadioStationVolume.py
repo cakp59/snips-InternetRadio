@@ -43,9 +43,8 @@ def action_wrapper(hermes, intentMessage, conf):
         if command == "volume 00":
             command="mpc stop"
         else:
-#            command= "amixer -c1 set Playback,0  "+command[5:7]+"%"
-             command= "mpc "+command"
-        subprocess.call( command, shell=True)
+            command= "mpc "+command"
+        subprocess.run( command, shell=True)
         ErrMess=""
 #        ErrMess="snips-InternetRadio - command OK - MyRadioStationVolume - command= "+command
         hermes.publish_end_session(intentMessage.session_id,ErrMess)
