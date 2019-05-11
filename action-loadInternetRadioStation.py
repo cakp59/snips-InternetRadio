@@ -54,8 +54,8 @@ radio01=franceinfo|http://direct.franceinfo.fr/live/franceinfo-midfi.mp3
             for i in range (30):
                 radioNum='%(aa)s%(number)02d' %{'aa': "radio", "number": i+1}
                 radioRecord=conf['secret'][radioNum]
-                radioName=radioRecord.find('|',0, len(radioRecord))
-                radioURL=        ??????    len(radioRecord) ????
+                radioName=radioRecord[8:radioRecord.find('|',0, len(radioRecord))]
+                radioURL=radioRecord[radioRecord.find('|',0, len(radioRecord))+1:len(radioRecord)]
                 command="mpc add "+radioURL
                 subprocess.call(command, shell=True)
             subprocess.call("mpc save snips.playlist.radio", shell=True)
