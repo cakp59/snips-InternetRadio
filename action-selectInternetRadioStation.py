@@ -41,7 +41,8 @@ def action_wrapper(hermes, intentMessage, conf):
     try:
         subprocess.call("mpc clear", shell=True)
         subprocess.call("mpc load snips.playlist.radio", shell=True)
-        subprocess.call("amixer -c1 set Playback,0 85%", shell=True)
+#        subprocess.call("amixer -c1 set Playback,0 85%", shell=True)
+        subprocess.call("mpc volume 80", shell=True)
         command="--????--"
         command=intentMessage.slots.SelectedStation.first().value
         command= "mpc "+command
