@@ -44,9 +44,18 @@ def action_wrapper(hermes, intentMessage, conf):
         if command == "recharge les radios internet":
             subprocess.call("mpc clear", shell=True)
             subprocess.call("mpc rm snips.playlist.radio", shell=True)
+ """
+
+format d'un paramètre du fichier config.ini
+
+radio01=franceinfo|http://direct.franceinfo.fr/live/franceinfo-midfi.mp3
+
+"""            
             for i in range (30):
                 radioNum='%(aa)s%(number)02d' %{'aa': "radio", "number": i+1}
-                radioURL=conf['secret'][radioNum]
+                radioRecord=conf['secret'][radioNum]
+                radioName=radioRecord.find('|',0, len(radioRecord))
+                radioURL=        ??????    len(radioRecord) ????
                 command="mpc add "+radioURL
                 subprocess.call(command, shell=True)
             subprocess.call("mpc save snips.playlist.radio", shell=True)
