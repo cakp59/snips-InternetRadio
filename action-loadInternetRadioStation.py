@@ -38,25 +38,37 @@ def action_wrapper(hermes, intentMessage, conf):
     Refer to the documentation for further details.
     """
     import subprocess
+    import os
+
     try:
         command="--????--"
         command=intentMessage.slots.RadioStationToLoad.first().value
         if command == "recharge les radios internet":
+            mpdDirPlaylist="/var/lib/mpd/playlists"
+            playlistFileName="snips.playlist.radio.m3u"
             subprocess.call("mpc clear", shell=True)
-            subprocess.call("mpc rm snips.playlist.radio", shell=True)  
+#            subprocess.call("mpc rm snips.playlist.radio", shell=True)  
             radioNumber=conf['secret'][RadioNumber]
-            
-            
-            
-            
-            for i in range (radioNumber):
+#
+# Open the file snips.playlist.radio.m3u in write mode
+# !!!! mpdDirPlaylist directory must have the good rights
+#
+            os.remove(mpdDirPlaylist+"/"+playlistFileName)
+            fo = open(mpdDirPlaylist+"/"+playlistFileName, "w")
+            fo.write("#EXTM3U"+"\n\n")
+            for i in range(radioNumber): 
+                radioNum='%(aa)s%(number)02d' %{'aa': "radio", "number": i+1}
+                radioRecord=conf['secret'][radioNum]
+                radioName=radioRecord[8:radioRecord.find('|',0, len(radioRecord))]
+                radioURL=radioRecord[radioRecord.find('|',0, len(radioRecord))+1:len(radioRe$                
+                fo.write("#EXTINF:0,"+radioName+"\n")
+                fo.write(radioURL+"\n\n")
+            fo.close()
+                        
 #                radioNum='%(aa)s%(number)02d' %{'aa': "radio", "number": i+1}
-#                radioRecord=conf['secret'][radioNum]
-#                radioName=radioRecord[8:radioRecord.find('|',0, len(radioRecord))]
-#                radioURL=radioRecord[radioRecord.find('|',0, len(radioRecord))+1:len(radioRecord)]
 #                command="mpc add "+radioURL
-                subprocess.call(command, shell=True)
-            subprocess.call("mpc save snips.playlist.radio", shell=True)
+#                subprocess.call(command, shell=True)
+#            subprocess.call("mpc save snips.playlist.radio", shell=True)
         else:
             ErrMess="snips-InternetRadio - command KO - loadInternetRadioStation - command="+command
             hermes.publish_end_session(intentMessage.session_id,ErrMess)
