@@ -64,7 +64,6 @@ def action_wrapper(hermes, intentMessage, conf):
                 fo.write("#EXTINF:0,"+radioName+"\n")
                 fo.write(radioURL+"\n\n")
             fo.close()
-                        
 #                radioNum='%(aa)s%(number)02d' %{'aa': "radio", "number": i+1}
 #                command="mpc add "+radioURL
 #                subprocess.call(command, shell=True)
