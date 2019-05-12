@@ -45,12 +45,16 @@ def action_wrapper(hermes, intentMessage, conf):
             subprocess.call("mpc clear", shell=True)
             subprocess.call("mpc rm snips.playlist.radio", shell=True)  
             radioNumber=conf['secret'][RadioNumber]
+            
+            
+            
+            
             for i in range (radioNumber):
-                radioNum='%(aa)s%(number)02d' %{'aa': "radio", "number": i+1}
-                radioRecord=conf['secret'][radioNum]
-                radioName=radioRecord[8:radioRecord.find('|',0, len(radioRecord))]
-                radioURL=radioRecord[radioRecord.find('|',0, len(radioRecord))+1:len(radioRecord)]
-                command="mpc add "+radioURL
+#                radioNum='%(aa)s%(number)02d' %{'aa': "radio", "number": i+1}
+#                radioRecord=conf['secret'][radioNum]
+#                radioName=radioRecord[8:radioRecord.find('|',0, len(radioRecord))]
+#                radioURL=radioRecord[radioRecord.find('|',0, len(radioRecord))+1:len(radioRecord)]
+#                command="mpc add "+radioURL
                 subprocess.call(command, shell=True)
             subprocess.call("mpc save snips.playlist.radio", shell=True)
         else:
