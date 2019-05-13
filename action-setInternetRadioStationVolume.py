@@ -43,7 +43,7 @@ def action_wrapper(hermes, intentMessage, conf):
         if command == "volume 00":
             command="mpc stop"
         else:
-            command= "mpc "+command"
+            command= "mpc "+command
         subprocess.call( command, shell=True)
         ErrMess=""
 #        ErrMess="snips-InternetRadio - command OK - MyRadioStationVolume - command= "+command
