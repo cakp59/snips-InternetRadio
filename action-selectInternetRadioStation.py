@@ -45,7 +45,7 @@ def action_wrapper(hermes, intentMessage, conf):
         subprocess.call("mpc volume 80", shell=True)
         command="--????--"
         command=intentMessage.slots.SelectedStation.first().value
-        command= "mpc "+command
+        command= "mpc searchplay "+command
         subprocess.call(command, shell=True)
         ErrMess=""
 #        ErrMess="snips-InternetRadio - command OK - SelectedStation - command="+command
