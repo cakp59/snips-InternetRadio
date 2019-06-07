@@ -1,6 +1,6 @@
 import os
 
-mpdDir="/var/lib/mpd/playlists/"
+mpdDir="/home/pi/Playlists/"
 config_ini_file="/var/lib/snips/skills/snips-InternetRadio/config.ini"
 playlistFileName="snips.playlist.radio.m3u"
 #
