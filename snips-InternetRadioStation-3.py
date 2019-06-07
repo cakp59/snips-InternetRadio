@@ -1,6 +1,6 @@
 import os
 
-mpdDir="/home/pi/Playlists/"
+playlistsDir="~/Playlists/"
 config_ini_file="/var/lib/snips/skills/snips-InternetRadio/config.ini"
 playlistFileName="snips.playlist.radio.m3u"
 #
@@ -8,7 +8,7 @@ playlistFileName="snips.playlist.radio.m3u"
 # Directory must have the good rights
 #
 fi=open(config_ini_file, "rt")
-fo = open(mpdDir+playlistFileName, "wt")
+fo = open(playlistsDir+playlistFileName, "wt")
 fo.write("#EXTM3U"+"\n\n")
 
 for radioRecord in fi:
